@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Heart‑Disease Predictor</title>
+  <style>
+    /* ---  Basic Reset  --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ---  Page Layout  --- */
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 4rem 1rem;
+      color: #333;
+    }
+
+    /* ---  Card Wrapper  --- */
+    .card {
+      background: #fff;
+      width: 100%;
+      max-width: 460px;
+      border-radius: 14px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+      padding: 2.5rem 2rem 2rem;
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 1.6rem;
+      color: #0d6efd;
+    }
+
+    /* ---  Form Layout  --- */
+    form {
+      display: grid;
+      gap: 1rem 1.2rem;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9rem;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      margin-top: 0.35rem;
+      padding: 0.55rem 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: border 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #0d6efd;
+    }
+
+    /* Make the submit span whole row */
+    .full-span { grid-column: 1 / -1; }
+
+    /* ---  Submit Button  --- */
+    button {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #0d6efd;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+
+    button:hover { background: #0b5ed7; }
+
+    /* ---  Result Text  --- */
+    .result {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Heart‑Disease Predictor</h2>
+
+    <form action="/predict_file" method="post">
+      <label>
+        Age
+        <input type="number" name="age" required>
+      </label>
+
+      <label>
+        Sex <small>(1 = M, 0 = F)</small>
+        <input type="number" name="sex" min="0" max="1" required>
+      </label>
+
+      <label>
+        Chest Pain Type <small>(0‑3)</small>
+        <input type="number" name="cp" min="0" max="3" required>
+      </label>
+
+      <label>
+        Resting BP
+        <input type="number" name="trestbps" required>
+      </label>
+
+      <label>
+        Cholesterol
+        <input type="number" name="chol" required>
+      </label>
+
+      <label>
+        Fasting BS <small>(1 = T, 0 = F)</small>
+        <input type="number" name="fbs" min="0" max="1" required>
+      </label>
+
+      <label>
+        Rest ECG <small>(0‑2)</small>
+        <input type="number" name="restecg" min="0" max="2" required>
+      </label>
+
+      <label>
+        Max HR
+        <input type="number" name="thalach" required>
+      </label>
+
+      <label>
+        Exercise Angina <small>(1 = Y, 0 = N)</small>
+        <input type="number" name="exang" min="0" max="1" required>
+      </label>
+
+      <label>
+        Oldpeak
+        <input type="text" name="oldpeak" required>
+      </label>
+
+      <label>
+        Slope <small>(0‑2)</small>
+        <input type="number" name="slope" min="0" max="2" required>
+      </label>
+
+      <label>
+        CA <small>(0‑4)</small>
+        <input type="number" name="ca" min="0" max="4" required>
+      </label>
+
+      <label>
+        Thal <small>(0‑3)</small>
+        <input type="number" name="thal" min="0" max="3" required>
+      </label>
+
+      <div class="full-span">
+        <button type="submit">Predict</button>
+      </div>
+    </form>
+
+    <!-- Flask will replace this with prediction_text -->
+    {% if prediction_text %}
+      <p class="result">{{ prediction_text }}</p>
+    {% endif %}
+  </div>
+</body>
+</html>
